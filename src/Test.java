@@ -3,7 +3,7 @@ public class Test {
 	public static void main(String args[]) {
 		// Create the game state with the initial position for an 8x8 board:
 		OthelloState state = new OthelloState(8);
-		OthelloPlayer players[] = { new OthelloRandomPlayer(), new OthelloMinimaxPlayer(5) };
+		OthelloPlayer players[] = { new OthelloRandomPlayer(), new OthelloMCTSPlayer() };
 
 		do {
 			// Display the current state in the console:

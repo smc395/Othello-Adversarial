@@ -101,4 +101,4 @@ public class OthelloMinimaxPlayer extends OthelloPlayer {
 		return bestScore;
 	}
 
-}// end MiniOthelloMaxPlayer class
+}// end OthelloMinimaxPlayer class
