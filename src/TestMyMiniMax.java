@@ -1,9 +1,9 @@
-public class Test {
+public class TestMyMiniMax {
 
 	public static void main(String args[]) {
 		// Create the game state with the initial position for an 8x8 board:
 		OthelloState state = new OthelloState(8);
-		OthelloPlayer players[] = { new OthelloRandomPlayer(), new OthelloMCTSPlayer() };
+		OthelloPlayer players[] = { new OthelloMyMinimaxPlayer(5), new OthelloRandomPlayer() };
 
 		do {
 			// Display the current state in the console:

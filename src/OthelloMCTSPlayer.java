@@ -5,7 +5,7 @@ public class OthelloMCTSPlayer extends OthelloPlayer {
 
 	@Override
 	public OthelloMove getMove(OthelloState state) {
-		return monteCarloTreeSearch(state, 100000);
+		return monteCarloTreeSearch(state, 10000);
 	}
 
 	public OthelloMove monteCarloTreeSearch(OthelloState boardState, int iterations) {

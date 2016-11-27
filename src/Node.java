@@ -29,6 +29,23 @@ public class Node {
 	public void increaseNumVisited() {
 		numVisited++;
 	}
+	
+	public void addNodeToTree(Node node){
+		children.add(node);
+	}
+	
+	public double calculateAverageScore(){
+		int scoreSum = 0;
+		if (children.size() == 0){
+			return score;
+		}
+		for(Node n : children){
+			scoreSum += n.getNodeScore();
+		}
+		double average = scoreSum / children.size();
+		setAverageScore(average);
+		return averageScore;
+	}
 
 	// *************** GETTERS ***************
 	public Node getParentNode() {
@@ -82,22 +99,5 @@ public class Node {
 
 	public void setAverageScore(double aScore) {
 		averageScore = aScore;
-	}
-	
-	public void addNodeToTree(Node node){
-		children.add(node);
-	}
-	
-	public double calculateAverageScore(){
-		int scoreSum = 0;
-		if (children.size() == 0){
-			return score;
-		}
-		for(Node n : children){
-			scoreSum += n.getNodeScore();
-		}
-		double average = scoreSum / children.size();
-		setAverageScore(average);
-		return averageScore;
 	}
 }

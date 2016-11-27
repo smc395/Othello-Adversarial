@@ -189,4 +189,69 @@ public class OthelloState {
 			return PLAYER2;
 		return PLAYER1;
 	}
+
+	/* My evaluation function */
+	public int eval() {
+		int score = 0;
+
+		for (int i = 0; i < boardSize; i++)
+			for (int j = 0; j < boardSize; j++) {
+				// base score: # of X's vs # of O's
+				int boardValue = board[i][j];
+				if (boardValue == PLAYER1) { score++; }
+				if (boardValue == PLAYER2) { score--; }
+
+				// if top and bottom edges (minus corners and C or X spaces)
+				if ((i == 0 || i == 7)&& (j > 1 && j < 6)) {
+				    if (boardValue == PLAYER1) { score++; }
+	                if (boardValue == PLAYER2) { score--; }
+				}
+				// left and right edges (minus corners and C or X spaces)
+				if ((j == 0 || j == 7) && (i > 1 && i < 6)){
+				    if (boardValue == PLAYER1) { score++; }
+	                if (boardValue == PLAYER2) { score--; }    
+				}
+                    
+				// handle special cases for corners and c/x spaces
+
+                //corner pieces
+				if ((j == 0 || j == 7) && (i == 0 || i == 7)) {
+				    if (boardValue == PLAYER1) { score++; }
+				    if (boardValue == PLAYER2) { score--; }
+				}
+				// upper left quadrant C and X spaces
+				if ((i == 0 && j == 1) || (i == 1 && j == 0) || (i == 1 && j == 1)) {
+				    // if the c-space is occupied, check if corner is also
+				    if (boardValue == PLAYER1 && (board[0][0] == NOTHING)) { score--; } 
+				    else if(boardValue == PLAYER1 && (board[0][0] == PLAYER1)){ score++;}
+	                if (boardValue == PLAYER2 && (board[0][0] == NOTHING)) { score++; }
+	                else if(boardValue == PLAYER2 && (board[0][0] == PLAYER1)){ score--;}
+				}
+				// upper right quadrant C and X spaces
+                if ((i == 0 && j == 6) || (i == 1 && j == 6) || (i == 1 && j == 7)) {
+                    // if the c-space is occupied, check if corner is also 
+                    if (boardValue == PLAYER1 && (board[0][7] == NOTHING)) { score--; } 
+                    else if(boardValue == PLAYER1 && (board[0][7] == PLAYER1)){ score++;}
+                    if (boardValue == PLAYER2 && (board[0][7] == NOTHING)) { score++; }
+                    else if(boardValue == PLAYER2 && (board[0][7] == PLAYER1)){ score--;}
+                }
+                // bottom right quadrant C and X spaces
+                if ((i == 7 && j == 6) || (i == 6 && j == 6) || (i == 6 && j == 7)) {
+                    // if the c-space is occupied, check if corner is also 
+                    if (boardValue == PLAYER1 && (board[7][7] == NOTHING)) { score--; } 
+                    else if(boardValue == PLAYER1 && (board[7][7] == PLAYER1)){ score++;}
+                    if (boardValue == PLAYER2 && (board[7][7] == NOTHING)) { score++; }
+                    else if(boardValue == PLAYER2 && (board[7][7] == PLAYER1)){ score--;}
+                }
+                // bottom left quadrant C and X spaces
+                if ((i == 7 && j == 1) || (i == 6 && j == 0) || (i == 6 && j == 1)) {
+                    // if the c-space is occupied, check if corner is also 
+                    if (boardValue == PLAYER1 && (board[7][0] == NOTHING)) { score--; } 
+                    else if(boardValue == PLAYER1 && (board[7][0] == PLAYER1)){ score++;}
+                    if (boardValue == PLAYER2 && (board[7][0] == NOTHING)) { score++; }
+                    else if(boardValue == PLAYER2 && (board[7][0] == PLAYER1)){ score--;}
+                }
+			}
+		return score;
+	}
 }
